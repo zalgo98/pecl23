@@ -15,7 +15,7 @@ public class PEC_lab_23 {
 
     public static void main(String[] args) {
         Banco banco= new Banco(250000);
-        Operario op1= new Operario(banco, "operario 1");
+        Operario op1= new Operario(banco, "operario 1");//crea hilo de operario
         Operario op2= new Operario(banco, "operario 2");
         Cajero cajero1 = new Cajero(1, banco, 50000, 100000);
         Cajero cajero2 = new Cajero(2, banco, 50000, 100000);
