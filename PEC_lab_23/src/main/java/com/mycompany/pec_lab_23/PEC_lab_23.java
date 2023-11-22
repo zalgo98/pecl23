@@ -17,7 +17,7 @@ public class PEC_lab_23 {
         Banco banco= new Banco(250000);
         Operario op1= new Operario(banco, "operario 1");//hilo de operario
         Operario op2= new Operario(banco, "operario 2");
-        Cajero cajero1 = new Cajero(1, banco, 50000, 100000);
+        Cajero cajero1 = new Cajero(1, banco, 50000, 100000);//hilo cajero
         Cajero cajero2 = new Cajero(2, banco, 50000, 100000);
         Cajero cajero3 = new Cajero(3, banco, 50000, 100000);
         Cajero cajero4 = new Cajero(4, banco, 50000, 100000);
