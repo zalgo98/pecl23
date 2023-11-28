@@ -12,11 +12,12 @@ public class Cajero {
     private Banco banco;
     private int inicial,max;
     private Operario operario;
+    
     public Cajero(int id, Banco banco, int inicial, int max) {
-    this.banco=banco;
-    this.inicial=inicial;
-    this.max=max;
-    this.operario=operario;
+        this.banco=banco;
+        this.inicial=inicial;
+        this.max=max;
+        this.operario=operario;
     }
     
     public boolean estaVacio(){

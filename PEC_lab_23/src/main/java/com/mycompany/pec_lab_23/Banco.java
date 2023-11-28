@@ -10,8 +10,11 @@ package com.mycompany.pec_lab_23;
  */
 class Banco {
     private int dineroBanco;
+    
     public Banco(int dineroBanco) {
-    this.dineroBanco=dineroBanco;
+        
+        this.dineroBanco = dineroBanco;
+        
     }
     public synchronized void ingresarDinero(int cantidad) {
         dineroBanco += cantidad;
