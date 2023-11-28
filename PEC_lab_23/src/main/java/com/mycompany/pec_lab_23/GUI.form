@@ -524,7 +524,7 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Songti SC" size="24" style="1"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Cajero 3"/>
+                <Property name="text" type="java.lang.String" value="Cajero 4"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel15">

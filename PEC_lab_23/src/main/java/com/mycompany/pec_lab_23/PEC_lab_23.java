@@ -30,7 +30,7 @@ public class PEC_lab_23 {
                 Thread.sleep(tiempoLlegada);
             } catch (InterruptedException e) {}
             String nombrePersona = "Persona" + (i + 1);
-            Persona persona = new Persona("persona"+ i, banco);
+            Persona persona = new Persona("persona"+ i, cajero1);//Cambiar cajero a numero aleatorio
             persona.start();
         }
     }

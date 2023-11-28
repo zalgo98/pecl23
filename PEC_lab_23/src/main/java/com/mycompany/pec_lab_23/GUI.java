@@ -1,3 +1,5 @@
+package com.mycompany.pec_lab_23;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -339,7 +341,7 @@ public class GUI extends javax.swing.JFrame {
         jPanel11.setBackground(new java.awt.Color(203, 229, 255));
 
         jLabel14.setFont(new java.awt.Font("Songti SC", 1, 24)); // NOI18N
-        jLabel14.setText("Cajero 3");
+        jLabel14.setText("Cajero 4");
 
         jLabel15.setFont(new java.awt.Font("Songti SC", 0, 18)); // NOI18N
         jLabel15.setText(" Total:");
@@ -403,17 +405,17 @@ public class GUI extends javax.swing.JFrame {
         jLabel17.setFont(new java.awt.Font("Songti SC", 1, 24)); // NOI18N
         jLabel17.setText("Operaio 2:");
         jPanel1.add(jLabel17);
-        jLabel17.setBounds(20, 530, 110, 35);
+        jLabel17.setBounds(20, 530, 110, 32);
 
         jLabel18.setFont(new java.awt.Font("Songti SC", 1, 24)); // NOI18N
         jLabel18.setText("Esperando para un cajero:");
         jPanel1.add(jLabel18);
-        jLabel18.setBounds(20, 430, 290, 35);
+        jLabel18.setBounds(20, 430, 290, 32);
 
         jLabel19.setFont(new java.awt.Font("Songti SC", 1, 24)); // NOI18N
         jLabel19.setText("Operaio 1:");
         jPanel1.add(jLabel19);
-        jLabel19.setBounds(20, 490, 110, 35);
+        jLabel19.setBounds(20, 490, 110, 32);
 
         jTextField11.setText("jTextField11");
         jPanel1.add(jTextField11);

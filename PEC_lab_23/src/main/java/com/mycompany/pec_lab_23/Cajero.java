@@ -19,6 +19,12 @@ public class Cajero {
         this.max=max;
         this.operario=operario;
     }
+    public void ingresarDinero(String idpersona, int dinero){
+        inicial +=dinero;
+    }
+    public void extraerDinero(String idpersona, int dinero){
+        inicial +=dinero;
+    }
     
     public boolean estaVacio(){
         boolean vacio= true;
