@@ -5,42 +5,82 @@
 package com.mycompany.pec_lab_23;
 
 import java.util.Random;
+import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 /**
  *
  * @author gonzalo
  */
-public class Persona extends Thread{
-    
-    private static final Random random = new Random();
-    private final Cajero cajero;
-    private final String idPersona;
-    private boolean operacionCompletada; // flag
-
+public class Persona extends Thread {
+    private static Random random = new Random();
+    private Cajero cajero;
+    private String idPersona;
+    private boolean operacionCompletada; // Flag
+    private Lock lock = new ReentrantLock();
+    private  Condition esperaCajero = lock.newCondition();
+    private String op;
     public Persona(String idPersona, Cajero cajero) {
         this.cajero = cajero;
         this.idPersona = idPersona;
         this.operacionCompletada = false;
     }
-    
+
     public void run() {
-        while (!operacionCompletada) {
-            try {
-                Thread.sleep(random.nextInt(3000) + 2000); // Tiempo de espera aleatorio entre 2 y 4 segundos
+        try {
+            lock.lock();
+            while (!operacionCompletada) {
                 int operacion = random.nextInt(2); // 0 para ingresar, 1 para extraer
                 int cantidad = (random.nextInt(6) + 5) * 1000; // Importe aleatorio entre 5000 y 10000
                 
                 if (operacion == 0) {
-                    cajero.ingresarDinero(idPersona,cantidad); // cajero. metti anche id persona 
+                    Thread.sleep(random.nextInt(2000) + 2000);// Tiempo de espera aleatorio entre 2 y 4 segundos
+                    cajero.ingresarDinero(idPersona, cantidad); // Persona ingresa dinero en cajero
+                    op=idPersona+"-I+ "+cantidad; 
+                    getIdPersona(op);
                 } else {
-                    cajero.extraerDinero(idPersona,cantidad); // cajero. metti anche id persona 
+                    Thread.sleep(random.nextInt(2000) + 2500);// Tiempo de espera aleatorio entre 2,5 y 4,5 segundos
+                    cajero.extraerDinero(idPersona, cantidad); // Persona extrae dinero del cajero
+                    op=idPersona+"-E- "+cantidad;
+                    getIdPersona(op);
                 }
-                
+
                 operacionCompletada = true;
-                
-            } catch (InterruptedException e) {
-                e.printStackTrace();
             }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } finally {
+            lock.unlock();
         }
     }
-    
+    public void getIdPersona(String op0){ //Obtine los datos de la operacion de la persona
+        switch (cajero.idCajero()) {
+            case 1:
+                setIdPersona1();
+                break;
+            case 2:
+                setIdPersona2();
+                break;
+            case 3:
+                setIdPersona3();
+                break;
+            case 4:
+                setIdPersona4();
+                break;    
+            default:
+                throw new AssertionError();
+        }
+    }
+    public String setIdPersona1(){
+        return op;
+    }
+    public String setIdPersona2(){
+        return op;
+    }
+    public String setIdPersona3(){
+        return op;
+    }
+    public String setIdPersona4(){
+        return op;
+    }
 }

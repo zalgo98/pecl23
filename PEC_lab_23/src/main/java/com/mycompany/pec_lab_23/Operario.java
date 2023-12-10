@@ -52,4 +52,5 @@ class Operario extends Thread {
         cajeroLleno.await();
         cajeroVacio.await();
     }
+    
 }

@@ -12,18 +12,20 @@ public class Cajero {
     private Banco banco;
     private int inicial,max;
     private Operario operario;
+    private int id;
     
     public Cajero(int id, Banco banco, int inicial, int max) {
         this.banco=banco;
         this.inicial=inicial;
         this.max=max;
         this.operario=operario;
+        this.id=id;
     }
     public void ingresarDinero(String idpersona, int dinero){
         inicial +=dinero;
     }
     public void extraerDinero(String idpersona, int dinero){
-        inicial +=dinero;
+        inicial -=dinero;
     }
     
     public boolean estaVacio(){
@@ -40,6 +42,9 @@ public class Cajero {
     }
     public void rellenaCajero(int dinero){
         inicial+= dinero;
+    }
+    public int idCajero(){//Obtenemos el id del cajero
+        return id;
     }
 }
 
