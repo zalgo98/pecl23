@@ -13,6 +13,8 @@ public class Cajero {
     private int inicial,max;
     private Operario operario;
     private int id;
+    private boolean lleno= false;
+    private boolean vacio= false;
     
     public Cajero(int id, Banco banco, int inicial, int max) {
         this.banco=banco;
@@ -21,26 +23,32 @@ public class Cajero {
         this.operario=operario;
         this.id=id;
     }
-    public void ingresarDinero(String idpersona, int dinero){
+    public void ingresarDinero(Persona idpersona, int dinero){
         inicial +=dinero;
+        if (max<=inicial){
+        lleno= true;
+        inicial-=dinero;
+        }
     }
-    public void extraerDinero(String idpersona, int dinero){
+    public void extraerDinero(Persona idpersona, int dinero){
         inicial -=dinero;
+        if (0>=inicial){
+        vacio= true;
+        inicial +=dinero;
+        }
     }
     
     public boolean estaVacio(){
-        boolean vacio= true;
         return vacio;
         }
-    public boolean estaLleno(){
-        boolean lleno= true;
+    public boolean estaLleno(){ 
         return lleno;
         }
-    public int vaciarCajero(){
+    public int vaciarCajero(){//Faltan los operarios
         int retirada=inicial - 50000;
         return retirada;
     }
-    public void rellenaCajero(int dinero){
+    public void rellenaCajero(int dinero){//faltan los operarios
         inicial+= dinero;
     }
     public int idCajero(){//Obtenemos el id del cajero

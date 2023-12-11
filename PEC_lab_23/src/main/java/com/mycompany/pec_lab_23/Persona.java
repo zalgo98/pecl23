@@ -16,14 +16,16 @@ public class Persona extends Thread {
     private static Random random = new Random();
     private Cajero cajero;
     private String idPersona;
+    private Banco banco;
     private boolean operacionCompletada; // Flag
     private Lock lock = new ReentrantLock();
-    private  Condition esperaCajero = lock.newCondition();
+    private Condition esperaCajero = lock.newCondition();
     private String op;
-    public Persona(String idPersona, Cajero cajero) {
+    public Persona(String idPersona, Cajero cajero, Banco banco) {
         this.cajero = cajero;
         this.idPersona = idPersona;
         this.operacionCompletada = false;
+        this.banco=banco;
     }
 
     public void run() {
@@ -35,12 +37,13 @@ public class Persona extends Thread {
                 
                 if (operacion == 0) {
                     Thread.sleep(random.nextInt(2000) + 2000);// Tiempo de espera aleatorio entre 2 y 4 segundos
-                    cajero.ingresarDinero(idPersona, cantidad); // Persona ingresa dinero en cajero
+                     // Persona ingresa dinero en cajero
+                    banco.ingresarCajero(this, cajero, cantidad);
                     op=idPersona+"-I+ "+cantidad; 
                     getIdPersona(op);
                 } else {
                     Thread.sleep(random.nextInt(2000) + 2500);// Tiempo de espera aleatorio entre 2,5 y 4,5 segundos
-                    cajero.extraerDinero(idPersona, cantidad); // Persona extrae dinero del cajero
+                    banco.extraerCajero(this, cajero, cantidad); // Persona extrae dinero del cajero
                     op=idPersona+"-E- "+cantidad;
                     getIdPersona(op);
                 }

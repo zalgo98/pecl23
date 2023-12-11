@@ -17,6 +17,7 @@ public class GUI extends javax.swing.JFrame {
      */
     public GUI() {
         initComponents();
+        this.persona= persona;
         operacion1.setText(persona.setIdPersona1());
         operacion2.setText(persona.setIdPersona2());
         operacion3.setText(persona.setIdPersona3());
