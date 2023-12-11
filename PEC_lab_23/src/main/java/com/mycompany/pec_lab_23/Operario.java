@@ -21,8 +21,9 @@ class Operario extends Thread {
     private Condition cajeroVacio = lock.newCondition();
     private int bolsa;
     
-    Operario(Banco banco, String idOperario) {
+    Operario(Banco banco, String idOperario) { // He anadido cajero
         this.banco=banco;
+       // this.cajero = cajero;
         this.idOperario=idOperario;
     }
     public void run(){
@@ -51,4 +52,5 @@ class Operario extends Thread {
         cajeroLleno.await();
         cajeroVacio.await();
     }
+    
 }
