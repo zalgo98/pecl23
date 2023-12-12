@@ -25,34 +25,38 @@ public class Cajero {
     }
     public void ingresarDinero(Persona idpersona, int dinero){
         inicial +=dinero;
-        if (max<=inicial){
-        lleno= true;
-        inicial-=dinero;
-        }
     }
     public void extraerDinero(Persona idpersona, int dinero){
         inicial -=dinero;
-        if (0>=inicial){
-        vacio= true;
-        inicial +=dinero;
-        }
+        
     }
     
-    public boolean estaVacio(){
+    public  synchronized boolean estaVacio(){//comprueba si esta vacio
         return vacio;
         }
-    public boolean estaLleno(){ 
+    public synchronized boolean estaLleno(){//comprueba si esta lleno 
         return lleno;
         }
+    public synchronized void setVacio(boolean vacio){
+        this.vacio=vacio;
+    }
+    public synchronized void setLleno(boolean lleno){
+        this.lleno=lleno;
+    }
     public int vaciarCajero(){//Faltan los operarios
         int retirada=inicial - 50000;
+        lleno=false;
         return retirada;
     }
     public void rellenaCajero(int dinero){//faltan los operarios
+        vacio=false;
         inicial+= dinero;
     }
     public int idCajero(){//Obtenemos el id del cajero
         return id;
+    }
+    public int saldoCajero(){
+        return inicial;
     }
 }
 

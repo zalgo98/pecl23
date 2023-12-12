@@ -8,11 +8,13 @@ import java.util.Random;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
+
 /**
  *
  * @author gonzalo
  */
 public class Persona extends Thread {
+
     private static Random random = new Random();
     private Cajero cajero;
     private String idPersona;
@@ -21,11 +23,12 @@ public class Persona extends Thread {
     private Lock lock = new ReentrantLock();
     private Condition esperaCajero = lock.newCondition();
     private String op;
+
     public Persona(String idPersona, Cajero cajero, Banco banco) {
         this.cajero = cajero;
         this.idPersona = idPersona;
         this.operacionCompletada = false;
-        this.banco=banco;
+        this.banco = banco;
     }
 
     public void run() {
@@ -34,18 +37,38 @@ public class Persona extends Thread {
             while (!operacionCompletada) {
                 int operacion = random.nextInt(2); // 0 para ingresar, 1 para extraer
                 int cantidad = (random.nextInt(6) + 5) * 1000; // Importe aleatorio entre 5000 y 10000
-                
+
                 if (operacion == 0) {
                     Thread.sleep(random.nextInt(2000) + 2000);// Tiempo de espera aleatorio entre 2 y 4 segundos
-                     // Persona ingresa dinero en cajero
+                    if (100000 <= cajero.saldoCajero() + cantidad) {//Comprueba si al ingresar el dinero nos vamos a pasar
+                        int cant=cantidad+cajero.saldoCajero()-100000;
+                        banco.ingresarCajero(this, cajero,cant );//Deja el saldo al maximo
+                        cantidad-=cant;
+                        cajero.setLleno(true);
+                    }
+                    while (cajero.estaLleno()== true) {
+                        esperaCajero.await();
+                    }
+                    // Persona ingresa dinero en cajero
                     banco.ingresarCajero(this, cajero, cantidad);
-                    op=idPersona+"-I+ "+cantidad; 
+                    op = idPersona + "-I+ " + cantidad;
                     getIdPersona(op);
                 } else {
                     Thread.sleep(random.nextInt(2000) + 2500);// Tiempo de espera aleatorio entre 2,5 y 4,5 segundos
+                    if (0 >= cajero.saldoCajero() - cantidad) {//comprueba si al retirar el dinero nos vamos a pasar
+                        int cant=cantidad-cajero.saldoCajero();
+                        banco.extraerCajero(this, cajero,cant);//Deja el saldo a cero
+                        cantidad-=cant;
+                        cajero.setVacio(true);
+                        
+                    }
+                    while (cajero.estaVacio() == true) {
+                        esperaCajero.await();
+                    }
                     banco.extraerCajero(this, cajero, cantidad); // Persona extrae dinero del cajero
-                    op=idPersona+"-E- "+cantidad;
+                    op = idPersona + "-E- " + cantidad;//datos de la operacion que hace la persona
                     getIdPersona(op);
+
                 }
 
                 operacionCompletada = true;
@@ -56,7 +79,8 @@ public class Persona extends Thread {
             lock.unlock();
         }
     }
-    public void getIdPersona(String op0){ //Obtine los datos de la operacion de la persona
+
+    public void getIdPersona(String op0) { //Obtine los datos de la operacion de la persona
         switch (cajero.idCajero()) {
             case 1:
                 setIdPersona1();
@@ -69,21 +93,25 @@ public class Persona extends Thread {
                 break;
             case 4:
                 setIdPersona4();
-                break;    
+                break;
             default:
                 throw new AssertionError();
         }
     }
-    public String setIdPersona1(){
+
+    public String setIdPersona1() {
         return op;
     }
-    public String setIdPersona2(){
+
+    public String setIdPersona2() {
         return op;
     }
-    public String setIdPersona3(){
+
+    public String setIdPersona3() {
         return op;
     }
-    public String setIdPersona4(){
+
+    public String setIdPersona4() {
         return op;
     }
 }
