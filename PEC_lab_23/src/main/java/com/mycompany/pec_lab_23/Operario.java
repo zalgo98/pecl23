@@ -21,28 +21,28 @@ class Operario extends Thread {
     private Condition cajeroVacio = lock.newCondition();
     private int bolsa;
     
-    Operario(Banco banco, String idOperario) { // He anadido cajero
+    Operario(Banco banco, String idOperario) { 
         this.banco=banco;
-       // this.cajero = cajero;
+       this.cajero=cajero;
         this.idOperario=idOperario;
     }
     public void run(){
         while (true){
             try{
-              while (!cajero.estaLleno() && !cajero.estaVacio()) {
+              while (cajero.estaLleno()!=true && cajero.estaVacio()!=true) {
                     esperarCajero();
-                    //comprobar operarios
+                    //comprueba si tiene que vaciar o rellenar el cajero
                 }
-              if(cajero.estaLleno()){
+              if(cajero.estaLleno()==true){
                   bolsa=cajero.vaciarCajero();
                   wait(2000);
                   banco.ingresarDinero(bolsa);
               }
-              else if(cajero.estaVacio()){
+              else if(cajero.estaVacio()==true){
                   bolsa=50000;
                   banco.extraerDinero(bolsa);
                   wait(3000);
-                  //cajero.rellenarCajero(bolsa);
+                  cajero.rellenaCajero(bolsa);
               }
               bolsa=0;
             }catch(Exception e){}
