@@ -23,20 +23,26 @@ public class PEC_lab_23 {
         op1.start();
         op2.start();
         Cajero[] cajeros = {cajero1, cajero2, cajero3, cajero4}; // Array de cajeros
-        
+        GUI interfaz= new GUI(banco);
+        interfaz.setVisible(true);
         Random rand = new Random();
+        
         for (int i = 0; i < 200; i++) {
+            
             int tiempoLlegada = rand.nextInt(1000);
             int cajeroId = rand.nextInt(4); // Generar índice aleatorio
-            
             try {
+                interfaz.mostrar();
                 Thread.sleep(tiempoLlegada);
                 Cajero cajeroSeleccionado = cajeros[cajeroId]; // Obtener cajero según el índice aleatorio
                 String nombrePersona = "Persona" + (i + 1);
-                Persona persona = new Persona("persona"+ i, cajeroSeleccionado, banco);   
+                Persona persona = new Persona("persona "+ i, cajeroSeleccionado, banco);     
                 persona.start();
             } catch (InterruptedException e) {
             }
+        }
+        while (true){
+            interfaz.mostrar();
         }
     }
 }

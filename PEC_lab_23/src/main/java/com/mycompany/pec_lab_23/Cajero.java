@@ -55,7 +55,7 @@ public class Cajero {
     public int idCajero(){//Obtenemos el id del cajero
         return id;
     }
-    public int saldoCajero(){
+    public int saldoCajero(){//Obtenemos saldo del cajero
         return inicial;
     }
 }

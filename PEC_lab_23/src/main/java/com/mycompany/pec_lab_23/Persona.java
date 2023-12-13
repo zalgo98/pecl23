@@ -29,9 +29,11 @@ public class Persona extends Thread {
         this.idPersona = idPersona;
         this.operacionCompletada = false;
         this.banco = banco;
+        
     }
 
     public void run() {
+
         try {
             lock.lock();
             while (!operacionCompletada) {
@@ -51,8 +53,8 @@ public class Persona extends Thread {
                     }
                     // Persona ingresa dinero en cajero
                     banco.ingresarCajero(this, cajero, cantidad);
-                    op = idPersona + "-I+ " + cantidad;
-                    getIdPersona(op);
+                    
+                    
                 } else {
                     Thread.sleep(random.nextInt(2000) + 2500);// Tiempo de espera aleatorio entre 2,5 y 4,5 segundos
                     if (0 >= cajero.saldoCajero() - cantidad) {//comprueba si al retirar el dinero nos vamos a pasar
@@ -66,12 +68,13 @@ public class Persona extends Thread {
                         esperaCajero.await();
                     }
                     banco.extraerCajero(this, cajero, cantidad); // Persona extrae dinero del cajero
-                    op = idPersona + "-E- " + cantidad;//datos de la operacion que hace la persona
-                    getIdPersona(op);
+                    
+                    
 
                 }
 
                 operacionCompletada = true;
+                
             }
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -79,39 +82,8 @@ public class Persona extends Thread {
             lock.unlock();
         }
     }
+public String getIdPersona(){
+    return idPersona;
+}
 
-    public void getIdPersona(String op0) { //Obtine los datos de la operacion de la persona
-        switch (cajero.idCajero()) {
-            case 1:
-                setIdPersona1();
-                break;
-            case 2:
-                setIdPersona2();
-                break;
-            case 3:
-                setIdPersona3();
-                break;
-            case 4:
-                setIdPersona4();
-                break;
-            default:
-                throw new AssertionError();
-        }
-    }
-
-    public String setIdPersona1() {
-        return op;
-    }
-
-    public String setIdPersona2() {
-        return op;
-    }
-
-    public String setIdPersona3() {
-        return op;
-    }
-
-    public String setIdPersona4() {
-        return op;
-    }
 }

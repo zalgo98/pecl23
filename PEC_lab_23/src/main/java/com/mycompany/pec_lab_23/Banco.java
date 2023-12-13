@@ -13,6 +13,8 @@ class Banco {
     private Cajero cajero;
     private Persona persona;
     private Operario operario;
+    private String operacion;
+    private int saldo;
     
     public Banco(int dineroBanco) {
         
@@ -38,11 +40,70 @@ class Banco {
     }
     public synchronized void ingresarCajero(Persona persona, Cajero cajero, int cantidad) {
         cajero.ingresarDinero(persona, cantidad);
-        
+        getSaldo(cajero);
+        System.out.println(cantidad+" "+cajero.saldoCajero());
+        operacion=(persona.getIdPersona()+ "- I - " + cantidad);
         notify();
     }
     public synchronized void extraerCajero(Persona persona, Cajero cajero, int cantidad) {
         cajero.extraerDinero(persona, cantidad);
+        getSaldo(cajero);
+        operacion=(persona.getIdPersona()+ "- E - " + cantidad);
+        
         notify();
     }
+    public void getSaldo(Cajero cajero) { //Obtine los datos de la operacion de la persona
+        switch (cajero.idCajero()) {
+            case 1:
+                saldo=cajero.saldoCajero();
+                setIdCajero1();
+                estadoCajero1();
+                break;
+            case 2:
+                saldo=cajero.saldoCajero();
+                setIdCajero2();
+                estadoCajero2();
+                break;
+            case 3:
+                saldo=cajero.saldoCajero();
+                setIdCajero3();
+                estadoCajero3();
+                break;
+            case 4:
+                saldo=cajero.saldoCajero();
+                setIdCajero4();
+                estadoCajero4();
+                break;
+            default:
+                throw new AssertionError();
+        }
+    }
+
+    public synchronized String estadoCajero1(){
+        return operacion;
+    }
+    public synchronized String estadoCajero2(){
+        return operacion;
+    }
+    public synchronized String estadoCajero3(){
+        return "ha ingresa 3";
+    }
+    public synchronized String estadoCajero4(){
+        return "ha ingresa 4";
+    }
+
+public String setIdCajero1() {
+        return Integer. toString(saldo);
+    }
+
+    public String setIdCajero2() {
+        return Integer. toString(saldo);
+    }
+public String setIdCajero3() {
+        return Integer. toString(saldo);
+    }
+public String setIdCajero4() {
+        return Integer. toString(saldo);
+    }
+
 }
