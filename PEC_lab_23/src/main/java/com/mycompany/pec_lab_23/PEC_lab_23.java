@@ -4,6 +4,8 @@
  */
 package com.mycompany.pec_lab_23;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -13,6 +15,7 @@ import java.util.Random;
 public class PEC_lab_23 {
 
     public static void main(String[] args) {
+        
         Banco banco = new Banco(250000);
         Operario op1 = new Operario(banco, "operario 1");//hilo de operario
         Operario op2 = new Operario(banco, "operario 2");
@@ -27,7 +30,7 @@ public class PEC_lab_23 {
         interfaz.setVisible(true);
         Random rand = new Random();
         
-        for (int i = 0; i < 200; i++) {
+        for (int i = 1; i < 201; i++) {
             
             int tiempoLlegada = rand.nextInt(1000);
             int cajeroId = rand.nextInt(4); // Generar índice aleatorio
@@ -37,6 +40,7 @@ public class PEC_lab_23 {
                 Cajero cajeroSeleccionado = cajeros[cajeroId]; // Obtener cajero según el índice aleatorio
                 String nombrePersona = "Persona" + (i + 1);
                 Persona persona = new Persona("persona "+ i, cajeroSeleccionado, banco);     
+                
                 persona.start();
             } catch (InterruptedException e) {
             }

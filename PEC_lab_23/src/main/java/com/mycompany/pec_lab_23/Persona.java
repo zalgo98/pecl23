@@ -4,6 +4,8 @@
  */
 package com.mycompany.pec_lab_23;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
@@ -23,7 +25,8 @@ public class Persona extends Thread {
     private Lock lock = new ReentrantLock();
     private Condition esperaCajero = lock.newCondition();
     private String op;
-
+    private boolean pausa=false;
+    List<Persona> listaPersonas= new ArrayList<>();
     public Persona(String idPersona, Cajero cajero, Banco banco) {
         this.cajero = cajero;
         this.idPersona = idPersona;
@@ -33,10 +36,11 @@ public class Persona extends Thread {
     }
 
     public void run() {
-
+        listaPersonas.add(this);
+        System.out.println(this);
         try {
             lock.lock();
-            while (!operacionCompletada) {
+            while (!operacionCompletada && pausa) {//&& banco.siguientes().size()==4
                 int operacion = random.nextInt(2); // 0 para ingresar, 1 para extraer
                 int cantidad = (random.nextInt(6) + 5) * 1000; // Importe aleatorio entre 5000 y 10000
 
@@ -85,5 +89,11 @@ public class Persona extends Thread {
 public String getIdPersona(){
     return idPersona;
 }
-
+public void pausarHilo() {
+        pausa = true;
+    }
+public synchronized void reanudarHilo() {
+        pausa = false;
+        notify(); // Notificar al hilo que puede continuar su ejecución
+    }
 }
