@@ -34,15 +34,15 @@ class Operario extends Thread {
                     //comprueba si tiene que vaciar o rellenar el cajero
                 }
               if(cajero.estaLleno()==true){
-                  bolsa=cajero.vaciarCajero();
+                  vaciarCajero();
                   wait(2000);
-                  banco.ingresarDinero(bolsa);
+                  banco.ingresarDinero(bolsa, this);
               }
               else if(cajero.estaVacio()==true){
                   bolsa=50000;
-                  banco.extraerDinero(bolsa);
+                  banco.extraerDinero(bolsa, this);
                   wait(3000);
-                  cajero.rellenaCajero(bolsa);
+                  rellenaCajero(bolsa);
               }
               bolsa=0;
             }catch(Exception e){}
@@ -51,6 +51,21 @@ class Operario extends Thread {
     private void esperarCajero() throws InterruptedException {
         cajeroLleno.await();
         cajeroVacio.await();
+    }
+    public void vaciarCajero(){//Vacia los cajeros
+        int retirada=cajero.saldoCajero() - 50000;
+        cajero.setLleno(false);
+        cajero.setSaldo(retirada);
+    }
+    public void rellenaCajero(int dinero){//rellena los cajeros
+        cajero.setVacio(false);
+        cajero.setSaldo(dinero);
+    }
+    public String setID(){
+        return idOperario;
+    }
+    public int idCajero(){
+        return cajero.idCajero();
     }
     
 }

@@ -39,9 +39,9 @@ public class PEC_lab_23 {
                 Thread.sleep(tiempoLlegada);
                 Cajero cajeroSeleccionado = cajeros[cajeroId]; // Obtener cajero según el índice aleatorio
                 String nombrePersona = "Persona" + (i + 1);
-                Persona persona = new Persona("persona "+ i, cajeroSeleccionado, banco);     
-                
+                Persona persona = new Persona("persona "+ i, cajeroSeleccionado, banco);    
                 persona.start();
+                persona.join();
             } catch (InterruptedException e) {
             }
         }

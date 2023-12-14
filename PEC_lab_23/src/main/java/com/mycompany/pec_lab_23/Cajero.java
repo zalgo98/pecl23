@@ -10,53 +10,51 @@ package com.mycompany.pec_lab_23;
  */
 public class Cajero {
     private Banco banco;
-    private int inicial,max;
+    private int saldo,max;
     private Operario operario;
     private int id;
     private boolean lleno= false;
     private boolean vacio= false;
+    boolean ocupado=false;
     
-    public Cajero(int id, Banco banco, int inicial, int max) {
+    public Cajero(int id, Banco banco, int saldo, int max) {
         this.banco=banco;
-        this.inicial=inicial;
+        this.saldo=saldo;
         this.max=max;
         this.operario=operario;
         this.id=id;
     }
     public void ingresarDinero(Persona idpersona, int dinero){
-        inicial +=dinero;
+        ocupado=true;
+        saldo +=dinero;
     }
     public void extraerDinero(Persona idpersona, int dinero){
-        inicial -=dinero;
+        ocupado=true;
+        saldo -=dinero;
         
     }
     
-    public  synchronized boolean estaVacio(){//comprueba si esta vacio
+    public boolean estaVacio(){//comprueba si esta vacio
         return vacio;
         }
-    public synchronized boolean estaLleno(){//comprueba si esta lleno 
+    public boolean estaLleno(){//comprueba si esta lleno 
         return lleno;
         }
-    public synchronized void setVacio(boolean vacio){
+    public void setVacio(boolean vacio){
         this.vacio=vacio;
     }
-    public synchronized void setLleno(boolean lleno){
+    public void setLleno(boolean lleno){
         this.lleno=lleno;
     }
-    public int vaciarCajero(){//Faltan los operarios
-        int retirada=inicial - 50000;
-        lleno=false;
-        return retirada;
-    }
-    public void rellenaCajero(int dinero){//faltan los operarios
-        vacio=false;
-        inicial+= dinero;
-    }
+    
     public int idCajero(){//Obtenemos el id del cajero
         return id;
     }
     public int saldoCajero(){//Obtenemos saldo del cajero
-        return inicial;
+        return saldo;
+    }
+    public void setSaldo(int nSaldo){
+        saldo=nSaldo;
     }
 }
 

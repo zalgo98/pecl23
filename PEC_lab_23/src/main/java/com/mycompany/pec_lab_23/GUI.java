@@ -1,6 +1,7 @@
 package com.mycompany.pec_lab_23;
 
 import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JFrame;
 
 /*
@@ -16,6 +17,7 @@ public class GUI extends javax.swing.JFrame {
     private Banco banco;
     private boolean iniciar;
     private Persona persona;
+    List<String> operarios;
 
     /**
      * Creates new form GUI
@@ -30,23 +32,36 @@ public class GUI extends javax.swing.JFrame {
         jTextField5.setText("");
         jTextField7.setText("");
         jTextField9.setText("");
+        jTextField11.setText("");
+        jTextField13.setText("");
+        jTextArea1.setText("");
+        
         this.banco=banco;
         this.iniciar=true;
         this.persona=persona;
+        this.operarios=banco.listaOperarios;
+        
         
     }
     public void mostrar(){
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(1200, 689);
+        setSize(1202, 699);
         setLocationRelativeTo(null);
+         for (String operacion: operarios){
+        jTextArea1.append(operacion + "\n ");
+         }
         operacion1.setText(banco.estadoCajero1());
         operacion2.setText(banco.estadoCajero2());
         operacion3.setText(banco.estadoCajero3());
         operacion4.setText(banco.estadoCajero4());
+        jTextField13.setText(banco.estadoOperario1());
+        jTextField11.setText(banco.estadoOperario2());
+                
         jTextField2.setText(banco.setIdCajero1());
         jTextField5.setText(banco.setIdCajero2());
         jTextField7.setText(banco.setIdCajero3());
         jTextField9.setText(banco.setIdCajero4());
+        
     }
 
     /**
@@ -90,14 +105,14 @@ public class GUI extends javax.swing.JFrame {
         jTextField9 = new javax.swing.JTextField();
         operacion4 = new javax.swing.JTextField();
         jLabel17 = new javax.swing.JLabel();
-        jLabel18 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
         jTextField11 = new javax.swing.JTextField();
-        jTextField12 = new javax.swing.JTextField();
         jTextField13 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
@@ -123,7 +138,7 @@ public class GUI extends javax.swing.JFrame {
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(7, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addContainerGap())
         );
@@ -187,6 +202,7 @@ public class GUI extends javax.swing.JFrame {
         jLabel7.setFont(new java.awt.Font("Songti SC", 0, 18)); // NOI18N
         jLabel7.setText("Operando:");
 
+        jTextField2.setEditable(false);
         jTextField2.setText("jTextField1");
         jTextField2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -194,6 +210,7 @@ public class GUI extends javax.swing.JFrame {
             }
         });
 
+        operacion1.setEditable(false);
         operacion1.setText("jTextField1");
         operacion1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -251,6 +268,7 @@ public class GUI extends javax.swing.JFrame {
         jLabel10.setFont(new java.awt.Font("Songti SC", 0, 18)); // NOI18N
         jLabel10.setText("Operando:");
 
+        jTextField5.setEditable(false);
         jTextField5.setText("jTextField1");
         jTextField5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -258,6 +276,7 @@ public class GUI extends javax.swing.JFrame {
             }
         });
 
+        operacion2.setEditable(false);
         operacion2.setText("jTextField1");
         operacion2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -315,6 +334,7 @@ public class GUI extends javax.swing.JFrame {
         jLabel13.setFont(new java.awt.Font("Songti SC", 0, 18)); // NOI18N
         jLabel13.setText("Operando:");
 
+        jTextField7.setEditable(false);
         jTextField7.setText("jTextField1");
         jTextField7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -322,6 +342,7 @@ public class GUI extends javax.swing.JFrame {
             }
         });
 
+        operacion3.setEditable(false);
         operacion3.setText("jTextField1");
         operacion3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -379,6 +400,7 @@ public class GUI extends javax.swing.JFrame {
         jLabel16.setFont(new java.awt.Font("Songti SC", 0, 18)); // NOI18N
         jLabel16.setText("Operando:");
 
+        jTextField9.setEditable(false);
         jTextField9.setText("jTextField1");
         jTextField9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -386,6 +408,7 @@ public class GUI extends javax.swing.JFrame {
             }
         });
 
+        operacion4.setEditable(false);
         operacion4.setText("jTextField1");
         operacion4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -435,29 +458,32 @@ public class GUI extends javax.swing.JFrame {
         jLabel17.setFont(new java.awt.Font("Songti SC", 1, 24)); // NOI18N
         jLabel17.setText("Operario 2:");
         jPanel1.add(jLabel17);
-        jLabel17.setBounds(20, 420, 130, 32);
-
-        jLabel18.setFont(new java.awt.Font("Songti SC", 1, 24)); // NOI18N
-        jLabel18.setText("Esperando para un cajero:");
-        jPanel1.add(jLabel18);
-        jLabel18.setBounds(20, 320, 320, 32);
+        jLabel17.setBounds(20, 370, 130, 32);
 
         jLabel19.setFont(new java.awt.Font("Songti SC", 1, 24)); // NOI18N
         jLabel19.setText("Operario 1:");
         jPanel1.add(jLabel19);
-        jLabel19.setBounds(20, 370, 230, 32);
+        jLabel19.setBounds(20, 320, 230, 32);
 
+        jTextField11.setEditable(false);
         jTextField11.setText("jTextField11");
+        jTextField11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField11ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jTextField11);
-        jTextField11.setBounds(370, 420, 340, 40);
+        jTextField11.setBounds(310, 390, 340, 40);
 
-        jTextField12.setText("jTextField11");
-        jPanel1.add(jTextField12);
-        jTextField12.setBounds(370, 320, 340, 40);
-
-        jTextField13.setText("jTextField11");
+        jTextField13.setEditable(false);
+        jTextField13.setText("jTextField13");
+        jTextField13.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField13ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jTextField13);
-        jTextField13.setBounds(370, 370, 340, 40);
+        jTextField13.setBounds(310, 320, 340, 40);
 
         jButton1.setBackground(new java.awt.Color(132, 193, 255));
         jButton1.setFont(new java.awt.Font("Songti SC", 1, 18)); // NOI18N
@@ -491,6 +517,13 @@ public class GUI extends javax.swing.JFrame {
         });
         jPanel1.add(jButton3);
         jButton3.setBounds(10, 550, 240, 40);
+
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jScrollPane1.setViewportView(jTextArea1);
+
+        jPanel1.add(jScrollPane1);
+        jScrollPane1.setBounds(290, 500, 140, 150);
 
         getContentPane().add(jPanel1);
         jPanel1.setBounds(0, 0, 1200, 700);
@@ -536,21 +569,7 @@ public class GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_operacion4ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        iniciar = !iniciar; // Invertir el estado de pausa
-    if (!iniciar) {
-        // Lógica para pausar los hilos de las personas
-        // Ejemplo: iterar a través de las personas y pausar sus hilos
-        for (Persona persona : persona.listaPersonas) {
-            persona.reanudarHilo();
-            
-        }
-    } else {
-        // Lógica para reanudar los hilos de las personas
-        // Ejemplo: iterar a través de las personas y reanudar sus hilos
-        for (Persona persona : persona.listaPersonas) {
-            persona.pausarHilo();
-        }
-    }
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -560,6 +579,14 @@ public class GUI extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jTextField13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField13ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField13ActionPerformed
+
+    private void jTextField11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField11ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField11ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -579,7 +606,6 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
@@ -595,9 +621,10 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField11;
-    private javax.swing.JTextField jTextField12;
     private javax.swing.JTextField jTextField13;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField5;
