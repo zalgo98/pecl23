@@ -17,7 +17,7 @@ public class Cajero {
     private boolean vacio= false;
     boolean ocupado=false;
     
-    public Cajero(int id, Banco banco, int saldo, int max) {
+    public Cajero(int id, Banco banco, int saldo, int max, Operario operario) {
         this.banco=banco;
         this.saldo=saldo;
         this.max=max;
@@ -55,6 +55,9 @@ public class Cajero {
     }
     public void setSaldo(int nSaldo){
         saldo=nSaldo;
+    }
+    public Operario setOperario(){
+        return operario;
     }
 }
 

@@ -8,16 +8,18 @@ import javax.swing.JFrame;
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-
 /**
  *
  * @author margheritadisanto
  */
 public class GUI extends javax.swing.JFrame {
+
     private Banco banco;
-    private boolean iniciar;
+    private boolean pausado = false;
     private Persona persona;
     List<String> operarios;
+    private String anterior = "";
+    private Operario operario;
 
     /**
      * Creates new form GUI
@@ -35,33 +37,42 @@ public class GUI extends javax.swing.JFrame {
         jTextField11.setText("");
         jTextField13.setText("");
         jTextArea1.setText("");
-        
-        this.banco=banco;
-        this.iniciar=true;
-        this.persona=persona;
-        this.operarios=banco.listaOperarios;
-        
-        
+        this.operario = operario;
+        this.banco = banco;
+
+        this.persona = persona;
+        this.operarios = banco.listaOperarios;
+
     }
-    public void mostrar(){
+
+    public void mostrar() {
+
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(1202, 699);
         setLocationRelativeTo(null);
-         for (String operacion: operarios){
-        jTextArea1.append(operacion + "\n ");
-         }
-        operacion1.setText(banco.estadoCajero1());
+        if(pausado==false){
+            
+        for (String operacion : operarios) {//funcion para imprimir las operaciones de los operarios
+            if (!operacion.equals(anterior)) {
+                jTextArea1.append(operacion + "\n ");
+                anterior = operacion;
+            
+            }
+            
+        }
+        }
+        operacion1.setText(banco.estadoCajero1());//Imprime por el jtext las operaciones
         operacion2.setText(banco.estadoCajero2());
         operacion3.setText(banco.estadoCajero3());
         operacion4.setText(banco.estadoCajero4());
         jTextField13.setText(banco.estadoOperario1());
         jTextField11.setText(banco.estadoOperario2());
-                
-        jTextField2.setText(banco.setIdCajero1());
+
+        jTextField2.setText(banco.setIdCajero1());//Imprime por el jtext los saldos
         jTextField5.setText(banco.setIdCajero2());
         jTextField7.setText(banco.setIdCajero3());
         jTextField9.setText(banco.setIdCajero4());
-        
+
     }
 
     /**
@@ -541,7 +552,7 @@ public class GUI extends javax.swing.JFrame {
 
     private void operacion1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_operacion1ActionPerformed
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_operacion1ActionPerformed
 
     private void jTextField5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField5ActionPerformed
@@ -569,15 +580,43 @@ public class GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_operacion4ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
+         if (!pausado) {
+            // Lógica para pausar personas y operarios 
+            pausado = true;
+           banco.pausar(pausado);
+        } else {
+            // Lógica para reanudar personas y operarios           
+            pausado = false;
+           banco.pausar(pausado);
+        }
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        if (!pausado) {
+            // Lógica para pausar personas y operarios 
+            pausado = true;
+           banco.pausarOp1(pausado);
+        } else {
+            // Lógica para reanudar personas y operarios           
+            pausado = false;
+           banco.pausarOp1(pausado);
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
+        if (!pausado) {
+            // Lógica para pausar personas y operarios 
+            pausado = true;
+           banco.pausarOp2(pausado);
+        } else {
+            // Lógica para reanudar personas y operarios           
+            pausado = false;
+           banco.pausarOp2(pausado);
+        }
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jTextField13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField13ActionPerformed
@@ -591,7 +630,6 @@ public class GUI extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

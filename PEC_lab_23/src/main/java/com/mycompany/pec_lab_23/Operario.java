@@ -20,21 +20,21 @@ class Operario extends Thread {
     private Condition cajeroLleno = lock.newCondition();
     private Condition cajeroVacio = lock.newCondition();
     private int bolsa;
-    
+    private boolean pausa=false;
     Operario(Banco banco, String idOperario) { 
         this.banco=banco;
        this.cajero=cajero;
         this.idOperario=idOperario;
     }
     public void run(){
-        while (true){
+        while (pausa==false){
             try{
               while (cajero.estaLleno()!=true && cajero.estaVacio()!=true) {
                     esperarCajero();
                     //comprueba si tiene que vaciar o rellenar el cajero
                 }
               if(cajero.estaLleno()==true){
-                  vaciarCajero();
+                  vaciarCajero(cajero);
                   wait(2000);
                   banco.ingresarDinero(bolsa, this);
               }
@@ -42,7 +42,7 @@ class Operario extends Thread {
                   bolsa=50000;
                   banco.extraerDinero(bolsa, this);
                   wait(3000);
-                  rellenaCajero(bolsa);
+                  rellenaCajero(bolsa, cajero);
               }
               bolsa=0;
             }catch(Exception e){}
@@ -52,12 +52,12 @@ class Operario extends Thread {
         cajeroLleno.await();
         cajeroVacio.await();
     }
-    public void vaciarCajero(){//Vacia los cajeros
+    public void vaciarCajero(Cajero cajero){//Vacia los cajeros
         int retirada=cajero.saldoCajero() - 50000;
         cajero.setLleno(false);
         cajero.setSaldo(retirada);
     }
-    public void rellenaCajero(int dinero){//rellena los cajeros
+    public void rellenaCajero(int dinero, Cajero cajero){//rellena los cajeros
         cajero.setVacio(false);
         cajero.setSaldo(dinero);
     }
@@ -67,5 +67,6 @@ class Operario extends Thread {
     public int idCajero(){
         return cajero.idCajero();
     }
+   
     
 }

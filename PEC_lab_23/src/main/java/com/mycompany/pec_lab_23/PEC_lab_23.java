@@ -19,10 +19,10 @@ public class PEC_lab_23 {
         Banco banco = new Banco(250000);
         Operario op1 = new Operario(banco, "operario 1");//hilo de operario
         Operario op2 = new Operario(banco, "operario 2");
-        Cajero cajero1 = new Cajero(1, banco, 50000, 100000);//hilo cajero
-        Cajero cajero2 = new Cajero(2, banco, 50000, 100000);
-        Cajero cajero3 = new Cajero(3, banco, 50000, 100000);
-        Cajero cajero4 = new Cajero(4, banco, 50000, 100000);
+        Cajero cajero1 = new Cajero(1, banco, 50000, 100000, op1);//hilo cajero
+        Cajero cajero2 = new Cajero(2, banco, 50000, 100000,op1);
+        Cajero cajero3 = new Cajero(3, banco, 50000, 100000,op2);
+        Cajero cajero4 = new Cajero(4, banco, 50000, 100000,op2);
         op1.start();
         op2.start();
         Cajero[] cajeros = {cajero1, cajero2, cajero3, cajero4}; // Array de cajeros
@@ -41,7 +41,7 @@ public class PEC_lab_23 {
                 String nombrePersona = "Persona" + (i + 1);
                 Persona persona = new Persona("persona "+ i, cajeroSeleccionado, banco);    
                 persona.start();
-                persona.join();
+                
             } catch (InterruptedException e) {
             }
         }
