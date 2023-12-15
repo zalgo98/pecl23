@@ -56,7 +56,8 @@ public class Cajero {
     public void setSaldo(int nSaldo){
         saldo=nSaldo;
     }
-    public Operario setOperario(){
+    
+    public Operario getOperario(){
         return operario;
     }
 }

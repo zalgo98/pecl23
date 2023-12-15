@@ -1,4 +1,4 @@
-package com.mycompany.pec_lab_23;
+package GUICliente;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,57 +12,24 @@ import javax.swing.JFrame;
  *
  * @author margheritadisanto
  */
-public class GUI extends javax.swing.JFrame {
-
-    private Banco banco;
-    private boolean pausado = false;
-    private Persona persona;
-    List<String> operarios;
-    private String anterior = "";
-    private Operario operario;
-
-    /**
-     * Creates new form GUI
-     */
-    public GUI(Banco banco) {
-        initComponents();    
-        this.operario = operario;
-        this.banco = banco;
-
-        this.persona = persona;
-        this.operarios = banco.listaOperarios;
-
-    }
-
-    public void mostrar() {
-
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(1202, 699);
-        setLocationRelativeTo(null);
-        if(!banco.estadoOperario1().equals("operario 1 pausado")||!banco.estadoOperario2().equals("operario 2 pausado")){
-            
-        for (String operacion : operarios) {//funcion para imprimir las operaciones de los operarios
-            if (!operacion.equals(anterior)) {
-                jTextArea1.append(operacion + "\n ");
-                anterior = operacion;
-            
-            }
-            
-        }
-        }
-        operacion1.setText(banco.estadoCajero1());//Imprime por el jtext las operaciones
-        operacion2.setText(banco.estadoCajero2());
-        operacion3.setText(banco.estadoCajero3());
-        operacion4.setText(banco.estadoCajero4());
-        jTextField13.setText(banco.estadoOperario1());
-        jTextField11.setText(banco.estadoOperario2());
+public class InterfazCliente extends javax.swing.JFrame {
         
-        jTextField1.setText(banco.setSaldo());//Imprime por el jtext los saldos
-        jTextField2.setText(banco.setSaldoCajero1());//Imprime por el jtext los saldos
-        jTextField5.setText(banco.setSaldoCajero2());
-        jTextField7.setText(banco.setSaldoCajero3());
-        jTextField9.setText(banco.setSaldoCajero4());
-
+    public void rem_Cliente(String c1, String c2,String c3,String c4,String cS1,String cS2,String cS3,String cS4, String cSBanco,String op1,String op2){
+    operacion1.setText(c1);//Imprime por el jtext las operaciones
+        operacion2.setText(c2);
+        operacion3.setText(c3);
+        operacion4.setText(c4);
+        jTextField13.setText(op1);
+        jTextField11.setText(op2);
+        
+        jTextField1.setText(cSBanco);//Imprime por el jtext los saldos
+        jTextField2.setText(cS1);//Imprime por el jtext los saldos
+        jTextField5.setText(cS2);
+        jTextField7.setText(cS3);
+        jTextField9.setText(cS4);
+    }
+    public InterfazCliente(){
+        initComponents();
     }
 
     /**
@@ -109,11 +76,6 @@ public class GUI extends javax.swing.JFrame {
         jLabel19 = new javax.swing.JLabel();
         jTextField11 = new javax.swing.JTextField();
         jTextField13 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
@@ -486,46 +448,6 @@ public class GUI extends javax.swing.JFrame {
         jPanel1.add(jTextField13);
         jTextField13.setBounds(310, 320, 340, 40);
 
-        jButton1.setBackground(new java.awt.Color(132, 193, 255));
-        jButton1.setFont(new java.awt.Font("Songti SC", 1, 18)); // NOI18N
-        jButton1.setText("Pausar/Reanudar todo");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jButton1);
-        jButton1.setBounds(10, 610, 240, 40);
-
-        jButton2.setBackground(new java.awt.Color(132, 193, 255));
-        jButton2.setFont(new java.awt.Font("Songti SC", 1, 18)); // NOI18N
-        jButton2.setText("Pausare/Reanudar op1");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jButton2);
-        jButton2.setBounds(10, 500, 240, 40);
-
-        jButton3.setBackground(new java.awt.Color(132, 193, 255));
-        jButton3.setFont(new java.awt.Font("Songti SC", 1, 18)); // NOI18N
-        jButton3.setText("Pausar/Reanudar op2");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jButton3);
-        jButton3.setBounds(10, 550, 240, 40);
-
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
-
-        jPanel1.add(jScrollPane1);
-        jScrollPane1.setBounds(290, 500, 140, 150);
-
         getContentPane().add(jPanel1);
         jPanel1.setBounds(0, 0, 1200, 700);
 
@@ -569,46 +491,6 @@ public class GUI extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_operacion4ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
-         if (!pausado) {
-            // Lógica para pausar personas y operarios 
-            pausado = true;
-           banco.pausar(pausado);
-        } else {
-            // Lógica para reanudar personas y operarios           
-            pausado = false;
-           banco.pausar(pausado);
-        }
-        
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-        if (!pausado) {
-            // Lógica para pausar personas y operarios 
-            pausado = true;
-           banco.pausarOp1(pausado);
-        } else {
-            // Lógica para reanudar personas y operarios           
-            pausado = false;
-           banco.pausarOp1(pausado);
-        }
-    }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-        if (!pausado) {
-            // Lógica para pausar personas y operarios 
-            pausado = true;
-           banco.pausarOp2(pausado);
-        } else {
-            // Lógica para reanudar personas y operarios           
-            pausado = false;
-           banco.pausarOp2(pausado);
-        }
-    }//GEN-LAST:event_jButton3ActionPerformed
-
     private void jTextField13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField13ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField13ActionPerformed
@@ -622,9 +504,6 @@ public class GUI extends javax.swing.JFrame {
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -649,8 +528,6 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField11;
     private javax.swing.JTextField jTextField13;

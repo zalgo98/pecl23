@@ -27,13 +27,14 @@ class Banco {
     private String op2;
     private String op3;
     private String op4;
-    private String op5;
-    private String op6;
+    private String op5 = "";
+    private String op6 = "";
     ArrayList<String> listaOperarios;
-    
+
     private boolean pausa = false;
     private boolean pausaOp1 = false;
     private boolean pausaOp2 = false;
+
     public Banco(int dineroBanco) {
 
         this.dineroBanco = dineroBanco;
@@ -45,9 +46,9 @@ class Banco {
     }
 
     public synchronized void ingresarDinero(int cantidad, Operario operario) {
-        
+
         dineroBanco += cantidad;
-        
+
         notify();
     }
 
@@ -59,72 +60,85 @@ class Banco {
             } catch (InterruptedException e) {
             }
         }
-        
+
         dineroBanco -= cantidad;
         notify();
     }
 
     public synchronized void ingresarCajero(Persona persona, Cajero cajero, int cantidad) {
-        if(pausa==false){
-        cantidad += 90000;
+        String evento;
+        if (pausa == false) {
 
-        if (100000 < cajero.saldoCajero() + cantidad) {//Comprueba si al ingresar el dinero nos vamos a pasar
-            int diferencia = 100000 - cajero.saldoCajero();
-            cajero.ingresarDinero(persona, diferencia);//Deja el saldo al maximo
-            
-            cantidad -= diferencia;
-            cajero.setLleno(true);
-            operario = cajero.setOperario();
-            operario.vaciarCajero(cajero);
-            trabajador = operario.setID() + "-C" + cajero.idCajero() + " + " + cantidad;
-        
-            getOperario(operario);
-        } else {
-            cajero.ingresarDinero(persona, cantidad);
-        }
-        operacion = (persona.getIdPersona() + "- I - " + cantidad);
+            if (100000 < cajero.saldoCajero() + cantidad) {//Comprueba si al ingresar el dinero nos vamos a pasar
+                int diferencia = 100000 - cajero.saldoCajero();
+                cajero.ingresarDinero(persona, diferencia);//Deja el saldo al maximo
 
-        getSaldo(cajero);
-        
-        notify();
+                cantidad -= diferencia;
+                cajero.setLleno(true);
+                operario = cajero.getOperario();
+                operario.vaciarCajero(cajero);
+                trabajador = operario.setID() + "-C" + cajero.idCajero() + " + " + cantidad;
+                evento = operario.setID() + " coje 50000€"+ " del cajero " + cajero.idCajero() + " y lo lleva a banco central";
+                Logger.logEvent(evento);
+                getOperario(operario);
+            } else {
+                cajero.ingresarDinero(persona, cantidad);
+            }
+            operacion = (persona.getIdPersona() + "- I - " + cantidad);
+
+            getSaldo(cajero);
+            evento = persona.getIdPersona() + " ingresa " + operacion + " en el cajero " + cajero.idCajero();
+            Logger.logEvent(evento);
+            notify();
         }
     }
 
     public synchronized void extraerCajero(Persona persona, Cajero cajero, int cantidad) {
-        if(pausa==false){
-        if (0 > cajero.saldoCajero() - cantidad) {//comprueba si al retirar el dinero nos vamos a pasar
-            int diferencia = cantidad - cajero.saldoCajero();
-            cajero.extraerDinero(persona, diferencia);//Deja el saldo a cero
-            cantidad -= diferencia;
-            cajero.setVacio(true);
-            operario = cajero.setOperario();
-            operario.rellenaCajero(cantidad, cajero);
-            getOperario(operario);
-            trabajador = operario.setID() + "-C" + cajero.idCajero() + " - " + cantidad;
-        } else {
-            cajero.extraerDinero(persona, cantidad);
-        }
-        operacion = (persona.getIdPersona() + "- E - " + cantidad);
-        getSaldo(cajero);
-       
-        notify();
+        String evento;
+        if (pausa == false) {
+            if (0 > cajero.saldoCajero() - cantidad) {//comprueba si al retirar el dinero nos vamos a pasar
+                int diferencia = cantidad - cajero.saldoCajero();
+                cajero.extraerDinero(persona, diferencia);//Deja el saldo a cero
+                cantidad -= diferencia;
+                cajero.setVacio(true);
+                operario = cajero.getOperario();
+                operario.rellenaCajero(cantidad, cajero);
+                getOperario(operario);
+                evento = operario.setID() + " deja 50000€"+ " en el cajero " + cajero.idCajero() + " del banco central";
+                Logger.logEvent(evento);
+                trabajador = operario.setID() + "-C" + cajero.idCajero() + " - " + cantidad;
+            } else {
+                cajero.extraerDinero(persona, cantidad);
+            }
+            operacion = (persona.getIdPersona() + "- E - " + cantidad);
+            getSaldo(cajero);
+            evento = persona.getIdPersona() + " retira " + operacion + " en el cajero " + cajero.idCajero();
+            Logger.logEvent(evento);
+            notify();
         }
     }
 
     public void getOperario(Operario operario) {
-       
-        if ("operario 1".equals(operario.setID())&& pausaOp1==false) {
-            System.out.println("lo ejecuta 1");
-            op5 = trabajador;
-            estadoOperario1();
-            listaOperarios.add(op5);
-        } else if("operario 2".equals(operario.setID())&&pausaOp2==false) {
-            System.out.println("lo ejecuta 2");
-            op6 = trabajador;
-            estadoOperario2();
-            listaOperarios.add(op6);
+
+        if ("operario 1".equals(operario.setID())) {
+            if (pausaOp1 == false) {
+                op5 = trabajador;
+                estadoOperario1();
+                listaOperarios.add(op5);
+            } else {
+
+            }
+
+        } else if ("operario 2".equals(operario.setID())) {
+            if (pausaOp2 == false) {
+                op6 = trabajador;
+                estadoOperario2();
+                listaOperarios.add(op6);
+            } else {
+                listaOperarios.remove(op6);
+            }
         }
-        
+
     }
 
     public void getSaldo(Cajero cajero) { //Obtiene los datos de la operacion de la persona
@@ -133,28 +147,29 @@ class Banco {
             case 1 -> {
                 saldo1 = cajero.saldoCajero();//Guarda el saldo del cajero
                 op1 = operacion;//Guarda la ultima
-                setIdCajero1();//imprime el saldo del cajero 
+                setSaldoCajero1();//imprime el saldo del cajero 
                 estadoCajero1();//imprime la ultima operacion realizada
             }
             case 2 -> {
                 saldo2 = cajero.saldoCajero();
                 op2 = operacion;
-                setIdCajero2();
+                setSaldoCajero2();
                 estadoCajero2();
             }
             case 3 -> {
                 saldo3 = cajero.saldoCajero();
                 op3 = operacion;
-                setIdCajero3();
+                setSaldoCajero3();
                 estadoCajero3();
             }
             case 4 -> {
                 saldo4 = cajero.saldoCajero();
                 op4 = operacion;
-                setIdCajero4();
+                setSaldoCajero4();
                 estadoCajero4();
             }
-            default -> throw new AssertionError();
+            default ->
+                throw new AssertionError();
         }
     }
 
@@ -175,53 +190,57 @@ class Banco {
     }
 
     public String estadoOperario1() {
-        if(pausaOp1==false){
-        return op5;
-        }
-        else{
-            return "pausado 1";
+        if (pausaOp1 == false) {
+            return op5;
+        } else {
+            return "operario 1 pausado";
         }
     }
 
     public String estadoOperario2() {
-        if(pausaOp2==false){
-        return op6;
-        }
-        else{
-            return "pausado 2";
+        if (pausaOp2 == false) {
+            return op6;
+        } else {
+            return "operario 2 pausado";
         }
     }
 
-    public String setIdCajero1() {
+    public String setSaldoCajero1() {
         return Integer.toString(saldo1);
     }
 
-    public String setIdCajero2() {
+    public String setSaldoCajero2() {
         return Integer.toString(saldo2);
     }
 
-    public String setIdCajero3() {
+    public String setSaldoCajero3() {
         return Integer.toString(saldo3);
     }
 
-    public String setIdCajero4() {
+    public String setSaldoCajero4() {
         return Integer.toString(saldo4);
     }
 
     public List<String> setLista() {
-        
+
         return listaOperarios;
     }
-    public void pausar(boolean pausar){
-        pausa=pausar;
-        pausaOp1=pausar;
-        pausaOp2=pausar;
+
+    public void pausar(boolean pausar) {
+        pausa = pausar;
+        pausaOp1 = pausar;
+        pausaOp2 = pausar;
     }
-    public void pausarOp1(boolean pausar){
-        pausaOp1=pausar;
+
+    public void pausarOp1(boolean pausar) {
+        pausaOp1 = pausar;
     }
-    public void pausarOp2(boolean pausar){
-        pausaOp2=pausar;
+
+    public void pausarOp2(boolean pausar) {
+        pausaOp2 = pausar;
     }
+    public String setSaldo(){
+        return Integer.toString(dineroBanco);
+    }
+       
 }
- 

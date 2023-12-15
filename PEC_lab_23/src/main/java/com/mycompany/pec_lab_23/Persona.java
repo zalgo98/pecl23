@@ -41,6 +41,7 @@ public class Persona extends Thread {
 
         try {
             lock.lock();
+            
             while (!operacionCompletada) {
                 while(pausa==false){
                 int operacion = random.nextInt(2); // 0 para ingresar, 1 para extraer
