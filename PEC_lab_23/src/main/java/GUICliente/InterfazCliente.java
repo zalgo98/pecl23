@@ -152,7 +152,7 @@ public class InterfazCliente extends javax.swing.JFrame {
         );
 
         jPanel1.add(jPanel4);
-        jPanel4.setBounds(790, 350, 340, 230);
+        jPanel4.setBounds(820, 110, 340, 230);
 
         jPanel8.setBackground(new java.awt.Color(203, 229, 255));
 
@@ -191,7 +191,7 @@ public class InterfazCliente extends javax.swing.JFrame {
                     .addGroup(jPanel8Layout.createSequentialGroup()
                         .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(operacion1, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE))
+                        .addComponent(operacion1, javax.swing.GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE))
                     .addGroup(jPanel8Layout.createSequentialGroup()
                         .addComponent(jLabel5)
                         .addGap(0, 0, Short.MAX_VALUE))
@@ -214,11 +214,11 @@ public class InterfazCliente extends javax.swing.JFrame {
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(operacion1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(100, Short.MAX_VALUE))
+                .addContainerGap(10, Short.MAX_VALUE))
         );
 
         jPanel1.add(jPanel8);
-        jPanel8.setBounds(20, 90, 240, 210);
+        jPanel8.setBounds(20, 90, 280, 120);
 
         jPanel9.setBackground(new java.awt.Color(203, 229, 255));
 
@@ -257,7 +257,7 @@ public class InterfazCliente extends javax.swing.JFrame {
                     .addGroup(jPanel9Layout.createSequentialGroup()
                         .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(operacion2, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE))
+                        .addComponent(operacion2, javax.swing.GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE))
                     .addGroup(jPanel9Layout.createSequentialGroup()
                         .addComponent(jLabel8)
                         .addGap(0, 0, Short.MAX_VALUE))
@@ -280,11 +280,11 @@ public class InterfazCliente extends javax.swing.JFrame {
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(operacion2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(100, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         jPanel1.add(jPanel9);
-        jPanel9.setBounds(310, 90, 240, 210);
+        jPanel9.setBounds(20, 230, 280, 130);
 
         jPanel10.setBackground(new java.awt.Color(203, 229, 255));
 
@@ -323,14 +323,14 @@ public class InterfazCliente extends javax.swing.JFrame {
                     .addGroup(jPanel10Layout.createSequentialGroup()
                         .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(operacion3, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE))
-                    .addGroup(jPanel10Layout.createSequentialGroup()
-                        .addComponent(jLabel11)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addComponent(operacion3, javax.swing.GroupLayout.DEFAULT_SIZE, 231, Short.MAX_VALUE))
                     .addGroup(jPanel10Layout.createSequentialGroup()
                         .addComponent(jLabel12)
                         .addGap(38, 38, 38)
-                        .addComponent(jTextField7)))
+                        .addComponent(jTextField7))
+                    .addGroup(jPanel10Layout.createSequentialGroup()
+                        .addComponent(jLabel11)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel10Layout.setVerticalGroup(
@@ -346,11 +346,11 @@ public class InterfazCliente extends javax.swing.JFrame {
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(operacion3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(100, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel1.add(jPanel10);
-        jPanel10.setBounds(610, 90, 240, 210);
+        jPanel10.setBounds(410, 90, 330, 110);
 
         jPanel11.setBackground(new java.awt.Color(203, 229, 255));
 
@@ -389,7 +389,7 @@ public class InterfazCliente extends javax.swing.JFrame {
                     .addGroup(jPanel11Layout.createSequentialGroup()
                         .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(operacion4, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE))
+                        .addComponent(operacion4, javax.swing.GroupLayout.DEFAULT_SIZE, 231, Short.MAX_VALUE))
                     .addGroup(jPanel11Layout.createSequentialGroup()
                         .addComponent(jLabel14)
                         .addGap(0, 0, Short.MAX_VALUE))
@@ -412,21 +412,21 @@ public class InterfazCliente extends javax.swing.JFrame {
                 .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(operacion4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(100, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         jPanel1.add(jPanel11);
-        jPanel11.setBounds(920, 90, 240, 210);
+        jPanel11.setBounds(410, 230, 330, 130);
 
         jLabel17.setFont(new java.awt.Font("Songti SC", 1, 24)); // NOI18N
         jLabel17.setText("Operario 2:");
         jPanel1.add(jLabel17);
-        jLabel17.setBounds(20, 370, 130, 32);
+        jLabel17.setBounds(900, 450, 130, 32);
 
         jLabel19.setFont(new java.awt.Font("Songti SC", 1, 24)); // NOI18N
         jLabel19.setText("Operario 1:");
         jPanel1.add(jLabel19);
-        jLabel19.setBounds(20, 320, 230, 32);
+        jLabel19.setBounds(220, 460, 230, 32);
 
         jTextField11.setEditable(false);
         jTextField11.setText("jTextField11");
@@ -436,7 +436,7 @@ public class InterfazCliente extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jTextField11);
-        jTextField11.setBounds(310, 390, 340, 40);
+        jTextField11.setBounds(800, 500, 340, 40);
 
         jTextField13.setEditable(false);
         jTextField13.setText("jTextField13");
@@ -446,7 +446,7 @@ public class InterfazCliente extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jTextField13);
-        jTextField13.setBounds(310, 320, 340, 40);
+        jTextField13.setBounds(140, 510, 340, 40);
 
         getContentPane().add(jPanel1);
         jPanel1.setBounds(0, 0, 1200, 700);

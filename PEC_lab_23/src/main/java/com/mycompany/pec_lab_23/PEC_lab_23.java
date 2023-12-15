@@ -33,10 +33,10 @@ public class PEC_lab_23 {
             op2.start();
 
             Cajero[] cajeros = {cajero1, cajero2, cajero3, cajero4}; // Array de cajeros
-
+            //Servidor rmi
             Random rand = new Random();
             ObjetoRemoto server = new ObjetoRemoto(banco);
-            Registry registry = LocateRegistry.createRegistry(1099);//En el examen no hace falta
+            Registry registry = LocateRegistry.createRegistry(1099);
             Naming.rebind("Localhost/ObjetRMI", server);
 
             GUI interfaz = new GUI(banco);
